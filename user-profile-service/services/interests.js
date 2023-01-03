@@ -30,12 +30,12 @@ module.exports.addReason = (id, reason) => {
         Profile.findOneAndUpdate(
           { userId: id },
           {
-            $addToSet: { reasons: { $each: reason } },
+            $addToSet: { reason: { $each: reason } },
           }
         )
           .exec()
           .then((profile) => {
-            resolve(profile.reasons);
+            resolve(profile.reason);
           })
           .catch((err) => {
             reject(`Unable to add reason to join for user with id: ${id}`);

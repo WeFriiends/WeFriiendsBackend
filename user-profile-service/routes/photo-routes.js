@@ -1,6 +1,7 @@
 const multer = require("multer");
 const aws = require("aws-sdk");
 const photoService = require("../services/photo.js");
+const passport = require("passport");
 
 const storage = multer.memoryStorage({
   destination: function (req, file, cb) {
@@ -24,24 +25,28 @@ const s3 = new aws.S3({
 });
 
 module.exports = (app) => {
-  app.post("/api/profile/upload", upload.single("profilePhoto"), (req, res) => {
-    console.log(req.file);
-    const params = {
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: req.file.originalname,
-      Body: req.file.buffer,
-      ACL: "public-read-write",
-      ContentType: "image/jpeg",
-    };
+  app.post(
+    "/api/profile/upload",
+    passport.authenticate("jwt", { session: false }),
+    upload.single("file"),
+    (req, res) => {
+      const params = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: req.file.originalname,
+        Body: req.file.buffer,
+        ACL: "public-read-write",
+        ContentType: "image/jpeg",
+      };
 
-    s3.upload(params, (error, data) => {
-      if (error) {
-        res.status(500).send({ err: error });
-      }
+      s3.upload(params, (error, data) => {
+        if (error) {
+          res.status(500).send({ err: error });
+        }
 
-      console.log(data);
+        console.log(data.Location);
 
-      photoService.addPhoto(req.user.userId, data.Location);
-    });
-  });
+        photoService.addPhoto(req.user.userId, data.Location);
+      });
+    }
+  );
 };

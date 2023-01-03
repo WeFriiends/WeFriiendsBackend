@@ -14,8 +14,11 @@ module.exports = (app) => {
       console.log(req.body.name);
       profileService
         .addName(req.user.userId, req.body.name)
-        .then((data) => {
-          res.status(200).json(data);
+        .then((name) => {
+          res.status(200).json({
+            name: name,
+            message: "Name has been successfully updated",
+          });
         })
         .catch((msg) => {
           res.status(422).json({ error: msg });
@@ -118,8 +121,8 @@ module.exports = (app) => {
     (req, res) => {
       additionalInfoService
         .addReason(req.user.userId, req.body.interests)
-        .then((data) => {
-          res.status(200).json(data);
+        .then((reasons) => {
+          res.status(200).json({ lookingFor: reasons });
         })
         .catch((msg) => {
           res.status(422).json({ error: msg });

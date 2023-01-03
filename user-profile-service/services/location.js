@@ -41,10 +41,11 @@ module.exports.addCity = (id, city) => {
   return new Promise((resolve, reject) => {
     Profile.findOneAndUpdate(
       { userId: id },
-      { $set: { location: { city: city } } }
+      { $set: { "location.city": city } }
     )
       .exec()
       .then((profile) => {
+        console.log(profile);
         resolve(profile.location);
       })
       .catch((err) => {

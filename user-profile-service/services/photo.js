@@ -19,7 +19,7 @@ module.exports.getPhotos = (id) => {
 
 module.exports.addPhoto = (id, photoUrl) => {
   return new Promise((resolve, reject) => {
-    Profile.find({
+    Profile.findOne({
       userId: id,
     })
       .exec()

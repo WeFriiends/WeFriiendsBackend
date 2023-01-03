@@ -8,6 +8,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 const mongoose = require("mongoose");
+const passport = require("passport");
 
 require("./models/Profile");
 require("./services/interests");
@@ -16,6 +17,7 @@ require("./services/location");
 require("./services/photo");
 require("./services/name-gender-bio");
 require("./services/profile");
+require("./middleware/token-strategy");
 
 const HTTP_PORT = process.env.PORT || 8080;
 
@@ -29,6 +31,8 @@ mongoose.connect(
     console.log("Connected to Mongo DB");
   }
 );
+
+app.use(passport.initialize());
 
 require("./routes/photo-routes")(app);
 require("./routes/update-routes")(app);

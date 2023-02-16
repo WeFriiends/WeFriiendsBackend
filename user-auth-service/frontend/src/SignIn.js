@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react';
+
 import axios from 'axios';
-import { useState } from 'react';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -28,7 +29,7 @@ const SignIn = () => {
         .then((res) => {
             console.log('response received ', res.data.message)
         }).catch(err => {
-            console.log('error ', err)
+            console.log('error ', err.response.data.message)
         })
     }
     return (

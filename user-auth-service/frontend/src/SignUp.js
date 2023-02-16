@@ -14,12 +14,8 @@ const SignUp = () => {
     const axiosConfig = {
         headers: { 
             'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "http://localhost:3000",
+            "Access-Control-Allow-Origin": "*",
         }
-    }
-    const headers= { 
-        'Content-Type': 'application/json;charset=UTF-8',
-        "Access-Control-Allow-Origin": "http://localhost:3000",
     }
     
     const postForm = () => {
@@ -33,19 +29,19 @@ const SignUp = () => {
             axiosConfig 
         )
         .then((res) => {
-            console.log('response received ', res.data.message)
+            console.log('response received ', res)
         }).catch(err => {
-            console.log('error ', err)
+            console.log('error received', err)
         })
     }
-
+    
     const googleSignIn = () => {
-        fetch('/api/auth/google', {headers})
-        .then(response => response.json())
-        .then(data => console.log(data));
-        //  axios.get('/api/auth/google', axiosConfig)
-        // .then(res => console.log(res))
-        // .catch(err => console.log('in err', err))
+        window.open("http://localhost:8080/api/auth/google");
+       
+    }
+
+    const facebookSignIn = () => {
+       
     }
 
     return (
@@ -81,12 +77,10 @@ const SignUp = () => {
                 <div style={{marginTop: '20px'}}>
                     
                      <button onClick={googleSignIn}>Google</button>
-                 
-                   
-                    <button>Facebook</button>
+                    <button onClick={facebookSignIn}>Facebook</button>
                 </div>
         </div>
-      );
+    );
 }
 
 export default SignUp;

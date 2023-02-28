@@ -78,12 +78,31 @@ ______________________________
 
 **/api/auth/google**
 
-GET route, initiates passport-google authentication.
+To use this route , frontend will need to use it this way: window.open(basaeUrl/api/auth/google);
+Authorization will be happening on Google side.
+After that there are two possibilities:
+if signup/login was sucessful:
+/api/auth/login/success
+GET route, that creates a token and sends it to the frontend
+response: {
+                success: true, 
+                message: 'sucess',
+                user: req.user,
+                token: token
+            }
+If something went wrong:
+/login/failed
+GET route, response: {
+            success: false, 
+            message: 'Failure of login attempt'
+        }
 
 Please reference Google auth documentation.
 ______________________________
 
 **/api/auth/google/callback**
+
+This route DOES NOT NEED TO BE FETCHED from frontend. It is an internal route that Google auth uses.
 
 GET route, callback route, saves the info of authenticated user in the database if user doesn't exist. Confirms user validity if user exists.
 

@@ -82,12 +82,12 @@ ______________________________
 
 **/api/auth/confirm/:confirmationCode**
 
-GET route, changes user status from "Pending" to "Active" if confirmation code passes validity check in the database
+GET route, returns token if user was confirmed.
 
 **Response**
 ```
 { 
-    "message": "message"
+    token
 }
 ```
 ______________________________

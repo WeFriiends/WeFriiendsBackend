@@ -82,7 +82,7 @@ ______________________________
 
 **/api/auth/confirm/:confirmationCode**
 
-GET route, returns token if user was confirmed.
+GET route, changes user status from 'pending' to 'active' and returns token if user was confirmed.
 
 **Response**
 ```

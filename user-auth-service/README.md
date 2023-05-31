@@ -35,7 +35,9 @@ POST route, accepts JSON object containing user email and 2 passwords, adds user
 ```
 
 **/api/auth/updatePassword**
+
 PATCH request, accepts JSON object with email, new password and password comfirmation. Checks if email exists in the database. Update user's password if user exists.
+
 **Params**
 ```
 {

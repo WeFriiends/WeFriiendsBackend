@@ -33,6 +33,21 @@ POST route, accepts JSON object containing user email and 2 passwords, adds user
     "message": "Pending registration confirmation for /user email/"
 }
 ```
+
+**/api/auth/updatePassword**
+PATCH request, accepts JSON object with email, new password and password comfirmation. Checks if email exists in the database. Update user's password if user exists.
+**Params**
+```
+{
+    email,
+    password,
+    password2
+}
+Returns: 
+status 200 -if update was successfull
+status 400 - if user not found
+status 422 - if passwords do not match
+```
 ______________________________
 
 **/api/auth/signin**

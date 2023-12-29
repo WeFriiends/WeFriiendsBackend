@@ -63,13 +63,13 @@ module.exports = (app) => {
     "/api/profile/dob",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
-      console.log(req.body);
+      console.log("body ",req.body);
       //modifying date into <YYYY-mm-dd> format
       let dobString = `<${req.body.year}-${
         req.body.month < 10 ? "0" + req.body.month : req.body.month
       }-${req.body.day < 10 ? "0" + req.body.day : req.body.day}>`;
 
-      console.log(dobString);
+      console.log("dob ",dobString);
 
       dateService
         .addDateOfBirthAndZodiac(req.user.userId, dobString)

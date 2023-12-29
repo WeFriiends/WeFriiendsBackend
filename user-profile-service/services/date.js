@@ -6,6 +6,7 @@ let Profile = mongoose.model("profiles");
 // dob param should have format "<YYYY-mm-dd>"
 module.exports.addDateOfBirthAndZodiac = (id, dob) => {
   return new Promise((resolve, reject) => {
+    console.log("got here")
     Profile.find({
       userId: id,
     })

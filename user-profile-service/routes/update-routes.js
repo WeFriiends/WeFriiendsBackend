@@ -11,7 +11,6 @@ module.exports = (app) => {
     "/api/profile/name",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
-      console.log(req.body.name);
       profileService
         .addName(req.user.userId, req.body.name)
         .then((name) => {

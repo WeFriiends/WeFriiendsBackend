@@ -1,21 +1,39 @@
 # User Auth Service
 
-This service has a function of adding new users to the users pool by having them follow one of 3 options:
-* Email
-* Facebook
-* Gmail
+The User Authentication Service provides functionality for adding new users to the user pool through various authentication methods, including Email, Facebook, Google, and Gmail. It interacts with MongoDB to store user data and utilizes **bcrypt** for password hashing.
 
-It adds new users to MongoDB database, and retrieves information/confirms if user with requested email is in the user pool.
+After successful authentication, the service issues JWT tokens containing digitally-signed user information, excluding the password, which are subsequently used for authorization in the "Authorization" header of requests to the server.
 
 **bcrypt** is used for password hashing for users who authenticate via email
 
 After user has been successfully authenticated, **JWT** token is sent back with digitally-signed information about the authenticated user such as their userId, but not the password. It will be sent with each subsequent request to the server in the "Authorization" header.
 
+Thank you for considering contributing to our project! Here's how you can **get started**:
+
+# Setup:
+
+1. Clone the repository to your local machine. 
+2. Navigate to the project directory.
+3. Install dependencies using ```npm install```
+5. Ensure you have access to necessary databases or external services.
+6. Access the API endpoints locally at http://localhost:3000.
+
+# GitHub Packages:
+
+Programming languages: **JavaScript (Node.js)**
+Frameworks: **Express.js**
+Dependencies: **bcrypt**, **jsonwebtoken**, **mongoose**
+
+# Commands to Run:
+
+```npm start``` : Starts the server.
+
+
 ## Routes
 
 **/api/auth/register** 
 
-POST route, accepts JSON object containing user email and 2 passwords, adds user to the user pool if email is unique (doesn't already exist in the database) and passwords match. New user is added with "Pending" status pending confirmation of email.
+POST route, accepts JSON object containing user email and 2 passwords, adds user to the user pool if email is unique (doesn't already exist in the database) and passwords match. A new user is added with "Pending" status pending confirmation of email.
 
 **Params**
 
@@ -95,12 +113,12 @@ ______________________________
 
 **/api/auth/google**
 
-To use this route , frontend will need to use it this way: window.open(basaeUrl/api/auth/google);
-Authorization will be happening on Google side.
-After that there are two possibilities:
-if signup/login was sucessful:
+To use this route, frontend will need to use it this way: window.open(basaeUrl/api/auth/google);
+Authorization will be happening on the Google side.
+After that, there are two possibilities:
+if signup/login was successful:
 /api/auth/login/success
-GET route, that creates a token and sends it to the frontend
+GET route, which creates a token and sends it to the frontend
 response: {
                 success: true, 
                 message: 'sucess',
@@ -109,10 +127,11 @@ response: {
             }
 If something went wrong:
 /login/failed
-GET route, response: {
-            success: false, 
-            message: 'Failure of login attempt'
-        }
+GET route, response: 
+{
+    success: false, 
+    message: 'Failure of login attempt'
+}
 
 Please reference Google auth documentation.
 ______________________________

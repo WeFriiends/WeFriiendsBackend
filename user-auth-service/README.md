@@ -16,7 +16,7 @@ Thank you for considering contributing to our project! Here's how you can **get 
 2. Navigate to the project directory.
 3. Install dependencies using ```npm install```
 5. Ensure you have access to necessary databases or external services.
-6. Access the API endpoints locally at http://localhost:3000.
+6. Access the API endpoints locally at http://localhost:8080.
 
 # GitHub Packages:
 
